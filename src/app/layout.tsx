@@ -1,11 +1,11 @@
 'use client';
-import Footer from '@/components/Footer';
 import { Box, Stack, ThemeProvider } from '@mui/material';
 // import type { Metadata } from 'next';
 import './globals.css';
 import theme from '@/utils/theme';
 import dynamic from 'next/dynamic';
 const Header = dynamic(() => import('@/components/Header'), { ssr: false });
+const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -18,34 +18,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased bg-white text-black">
-        <ThemeProvider theme={{ ...theme }}>
-          <Stack minHeight="100vh">
-            <Header />
+        <div>
+          <ThemeProvider theme={{ ...theme }}>
+            <Stack minHeight="100vh">
+              <Header />
 
-            <Box component="main" flexGrow={1}>
-              {/* <Container
-              maxWidth="sm"
-              style={{
-                backgroundColor: 'red',
-              }}
-            >
-              SM CONTAINER
-            </Container>
-            <Container
-              style={{
-                backgroundColor: 'red',
-              }}
-            >
-              MD CONTAINER
-            </Container> */}
-
-              {children}
-            </Box>
-            <Footer />
-          </Stack>
-        </ThemeProvider>
+              <Box component="main" flexGrow={1}>
+                {children}
+              </Box>
+              <Footer />
+            </Stack>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );
